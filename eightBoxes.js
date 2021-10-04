@@ -135,7 +135,7 @@ async function experimentInit() {
   instrPart1 = new visual.TextStim({
     win: psychoJS.window,
     name: 'instrPart1',
-    text: 'Notes:\n\n- Currently designed for "landscape" screens (16:10 or wider)\n- Blanks changed to a white box with a red "X"\n- Pictures and blanks now show for 3 seconds on click\n- Pictures will move to the sides, blanks will disappear\n- There is a (very inconspicuous) timer near the bottom-right\n',
+    text: 'Instructions:\n\n- There will be 8 boxes on the screen\n- Some boxes will contain (a picture of) a fruit\n- Their positions will be revealed for a short period of time before being hidden\n- As fast as you can, find all the hidden fruits without clicking on empty boxes\n- Errors will be recorded\n- Time taken will be recorded (starting from when the fruits are hidden)\n- Once a fruit has been "found" the box will become empty\n- There will be a practice trial, followed by 6 trials\n\nDevelopment/Debugging:\n- Picture/Blank show duration set to 1 second to speed up trials\n- No inter-trial instructions\n- Errors do not cause trial to end prematurely, yet\n- There is a very inconspicuous timer near the bottom-right of the screen\n',
     font: 'Open Sans',
     units: undefined, 
     pos: [0, 0], height: 0.03,  wrapWidth: 0.95, ori: 0.0,

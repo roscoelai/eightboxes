@@ -57,15 +57,16 @@ psychoJS.start({
   expName: expName,
   expInfo: expInfo,
   resources: [
-    {'name': 'imgs/strawberry.png', 'path': 'imgs/strawberry.png'},
-    {'name': 'conditions.csv', 'path': 'conditions.csv'},
-    {'name': 'imgs/banana.png', 'path': 'imgs/banana.png'},
     {'name': 'imgs/watermelon.png', 'path': 'imgs/watermelon.png'},
-    {'name': 'imgs/apple.png', 'path': 'imgs/apple.png'},
-    {'name': 'imgs/pear.png', 'path': 'imgs/pear.png'},
-    {'name': 'imgs/grapes.png', 'path': 'imgs/grapes.png'},
     {'name': 'imgs/continue.png', 'path': 'imgs/continue.png'},
-    {'name': 'imgs/empty-box.png', 'path': 'imgs/empty-box.png'}
+    {'name': 'imgs/strawberry.png', 'path': 'imgs/strawberry.png'},
+    {'name': 'imgs/grapes.png', 'path': 'imgs/grapes.png'},
+    {'name': 'imgs/empty-box.png', 'path': 'imgs/empty-box.png'},
+    {'name': 'imgs/end-experiment.png', 'path': 'imgs/end-experiment.png'},
+    {'name': 'imgs/pear.png', 'path': 'imgs/pear.png'},
+    {'name': 'imgs/banana.png', 'path': 'imgs/banana.png'},
+    {'name': 'imgs/apple.png', 'path': 'imgs/apple.png'},
+    {'name': 'conditions.csv', 'path': 'conditions.csv'}
   ]
 });
 
@@ -94,14 +95,14 @@ async function updateInfo() {
 
 
 var instrClock;
-var instrPart1;
-var contButton;
-var clickCont;
+var instr1;
+var contButton1;
+var clickCont1;
 var part1Clock;
 var DEBUG;
 var OBJ_DURATION;
-var BLANK_DURATION;
 var SHOW_TIMER;
+var BLANK_DURATION;
 var b;
 var BOX_SIZE;
 var BOX_FILL_COLOR;
@@ -110,9 +111,7 @@ var BOX_OPACITY;
 var OBJ_SIZE;
 var BLANK_SIZE;
 var BOX_POS;
-var IMG_SRCS;
-var objs6;
-var autodraw_all;
+var set_autodraws;
 var box1;
 var box2;
 var box3;
@@ -123,50 +122,54 @@ var box7;
 var box8;
 var highlighter;
 var blank;
-var exitButton;
-var clickExit;
+var contButton2;
+var endButton2;
+var clickCont2;
 var debugTimer;
 var headText;
+var end_experiment;
+var consec_errors;
+var IMG_SRCS;
+var objs6;
 var globalClock;
 var routineTimer;
 async function experimentInit() {
   // Initialize components for Routine "instr"
   instrClock = new util.Clock();
-  instrPart1 = new visual.TextStim({
+  instr1 = new visual.TextStim({
     win: psychoJS.window,
-    name: 'instrPart1',
+    name: 'instr1',
     text: 'Instructions:\n\n- There will be 8 boxes on the screen\n- Some boxes will contain (a picture of) a fruit\n- Their positions will be revealed for a short period of time before being hidden\n- As fast as you can, find all the hidden fruits without clicking on empty boxes\n- Errors will be recorded\n- Time taken will be recorded (starting from when the fruits are hidden)\n- Once a fruit has been "found" the box will become empty\n- There will be a practice trial, followed by 6 trials\n\nDevelopment/Debugging:\n- Picture/Blank show duration set to 1 second to speed up trials\n- No inter-trial instructions\n- Errors do not cause trial to end prematurely, yet\n- There is a very inconspicuous timer near the bottom-right of the screen\n',
     font: 'Open Sans',
     units: undefined, 
-    pos: [0, 0], height: 0.03,  wrapWidth: 0.95, ori: 0.0,
+    pos: [0, 0], height: 0.025,  wrapWidth: 0.98, ori: 0.0,
     color: new util.Color('white'),  opacity: undefined,
     depth: 0.0 
   });
   
-  contButton = new visual.ImageStim({
+  contButton1 = new visual.ImageStim({
     win : psychoJS.window,
-    name : 'contButton', units : undefined, 
+    name : 'contButton1', units : undefined, 
     image : 'imgs/continue.png', mask : undefined,
     ori : 0.0, pos : [0, (- 0.4)], size : [0.32, 0.112],
     color : new util.Color([1, 1, 1]), opacity : undefined,
     flipHoriz : false, flipVert : false,
     texRes : 128.0, interpolate : true, depth : -1.0 
   });
-  clickCont = new core.Mouse({
+  clickCont1 = new core.Mouse({
     win: psychoJS.window,
   });
-  clickCont.mouseClock = new util.Clock();
+  clickCont1.mouseClock = new util.Clock();
   // Initialize components for Routine "part1"
   part1Clock = new util.Clock();
   DEBUG = true;
   OBJ_DURATION = 3.0;
-  BLANK_DURATION = 3.0;
   SHOW_TIMER = false;
   if (DEBUG) {
       OBJ_DURATION = 1.0;
-      BLANK_DURATION = 1.0;
       SHOW_TIMER = true;
   }
+  BLANK_DURATION = OBJ_DURATION;
   b = 0.1;
   BOX_SIZE = [(2 * b), (2 * b)];
   BOX_FILL_COLOR = "black";
@@ -175,13 +178,7 @@ async function experimentInit() {
   OBJ_SIZE = [(1.8 * b), (1.8 * b)];
   BLANK_SIZE = OBJ_SIZE;
   BOX_POS = [[((- 3) * b), b], [(- b), b], [b, b], [(3 * b), b], [((- 3) * b), (- b)], [(- b), (- b)], [b, (- b)], [(3 * b), (- b)]];
-  IMG_SRCS = ["imgs/apple.png", "imgs/banana.png", "imgs/grapes.png", "imgs/pear.png", "imgs/strawberry.png", "imgs/watermelon.png"];
-  objs6 = [];
-  for (var i, _pj_c = 0, _pj_a = util.range(6), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
-      i = _pj_a[_pj_c];
-      objs6.push(new visual.ImageStim({"win": psychoJS.window, "name": `obj${(i + 1)}`, "image": IMG_SRCS[i], "pos": [0, (- 1.0)], "size": OBJ_SIZE}));
-  }
-  function _autodraw_all(objs, t_f) {
+  function _set_autodraws(objs, t_f) {
       for (var obj, _pj_c = 0, _pj_a = objs, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
           obj = _pj_a[_pj_c];
           if ((obj !== null)) {
@@ -189,7 +186,7 @@ async function experimentInit() {
           }
       }
   }
-  autodraw_all = _autodraw_all;
+  set_autodraws = _set_autodraws;
   
   box1 = new visual.Rect ({
     win: psychoJS.window, name: 'box1', 
@@ -266,7 +263,7 @@ async function experimentInit() {
   highlighter = new visual.Rect ({
     win: psychoJS.window, name: 'highlighter', 
     width: BOX_SIZE[0], height: BOX_SIZE[1],
-    ori: 0.0, pos: [0, (- 1.0)],
+    ori: 0.0, pos: [1.0, 1.0],
     lineWidth: 1.0, lineColor: new util.Color('white'),
     fillColor: new util.Color('black'),
     opacity: BOX_OPACITY, depth: -9, interpolate: true,
@@ -276,24 +273,33 @@ async function experimentInit() {
     win : psychoJS.window,
     name : 'blank', units : undefined, 
     image : 'imgs/empty-box.png', mask : undefined,
-    ori : 0.0, pos : [0, (- 1.0)], size : BLANK_SIZE,
+    ori : 0.0, pos : [1.0, 1.0], size : BLANK_SIZE,
     color : new util.Color([1, 1, 1]), opacity : undefined,
     flipHoriz : false, flipVert : false,
     texRes : 128.0, interpolate : true, depth : -10.0 
   });
-  exitButton = new visual.ImageStim({
+  contButton2 = new visual.ImageStim({
     win : psychoJS.window,
-    name : 'exitButton', units : undefined, 
+    name : 'contButton2', units : undefined, 
     image : 'imgs/continue.png', mask : undefined,
     ori : 0.0, pos : [0, (- 0.4)], size : [0.32, 0.112],
     color : new util.Color([1, 1, 1]), opacity : undefined,
     flipHoriz : false, flipVert : false,
     texRes : 128.0, interpolate : true, depth : -11.0 
   });
-  clickExit = new core.Mouse({
+  endButton2 = new visual.ImageStim({
+    win : psychoJS.window,
+    name : 'endButton2', units : undefined, 
+    image : 'imgs/end-experiment.png', mask : undefined,
+    ori : 0.0, pos : [0, 0], size : [0.537, 0.112],
+    color : new util.Color([1, 1, 1]), opacity : undefined,
+    flipHoriz : false, flipVert : false,
+    texRes : 128.0, interpolate : true, depth : -12.0 
+  });
+  clickCont2 = new core.Mouse({
     win: psychoJS.window,
   });
-  clickExit.mouseClock = new util.Clock();
+  clickCont2.mouseClock = new util.Clock();
   debugTimer = new visual.TextStim({
     win: psychoJS.window,
     name: 'debugTimer',
@@ -302,7 +308,7 @@ async function experimentInit() {
     units: undefined, 
     pos: [0.45, (- 0.45)], height: 0.01,  wrapWidth: undefined, ori: 0.0,
     color: new util.Color('white'),  opacity: 0.2,
-    depth: -13.0 
+    depth: -14.0 
   });
   
   headText = new visual.TextStim({
@@ -313,8 +319,17 @@ async function experimentInit() {
     units: undefined, 
     pos: [0, 0.4], height: 0.05,  wrapWidth: undefined, ori: 0.0,
     color: new util.Color('white'),  opacity: undefined,
-    depth: -14.0 
+    depth: -15.0 
   });
+  
+  end_experiment = false;
+  consec_errors = 0;
+  IMG_SRCS = ["imgs/apple.png", "imgs/banana.png", "imgs/grapes.png", "imgs/pear.png", "imgs/strawberry.png", "imgs/watermelon.png"];
+  objs6 = [];
+  for (var i, _pj_c = 0, _pj_a = util.range(6), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+      i = _pj_a[_pj_c];
+      objs6.push(new visual.ImageStim({"win": psychoJS.window, "name": `obj${(i + 1)}`, "image": IMG_SRCS[i], "pos": [1.0, 1.0], "size": OBJ_SIZE}));
+  }
   
   // Create some handy timers
   globalClock = new util.Clock();  // to track the time since experiment started
@@ -339,15 +354,15 @@ function instrRoutineBegin(snapshot) {
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
     // update component parameters for each repeat
-    // setup some python lists for storing info about the clickCont
-    clickCont.clicked_name = [];
+    // setup some python lists for storing info about the clickCont1
+    clickCont1.clicked_name = [];
     gotValidClick = false; // until a click is received
-    clickCont.mouseClock.reset();
+    clickCont1.mouseClock.reset();
     // keep track of which components have finished
     instrComponents = [];
-    instrComponents.push(instrPart1);
-    instrComponents.push(contButton);
-    instrComponents.push(clickCont);
+    instrComponents.push(instr1);
+    instrComponents.push(contButton1);
+    instrComponents.push(clickCont1);
     
     for (const thisComponent of instrComponents)
       if ('status' in thisComponent)
@@ -367,45 +382,45 @@ function instrRoutineEachFrame() {
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
-    // *instrPart1* updates
-    if (t >= 0.0 && instrPart1.status === PsychoJS.Status.NOT_STARTED) {
+    // *instr1* updates
+    if (t >= 0.0 && instr1.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      instrPart1.tStart = t;  // (not accounting for frame time here)
-      instrPart1.frameNStart = frameN;  // exact frame index
+      instr1.tStart = t;  // (not accounting for frame time here)
+      instr1.frameNStart = frameN;  // exact frame index
       
-      instrPart1.setAutoDraw(true);
+      instr1.setAutoDraw(true);
     }
 
     
-    // *contButton* updates
-    if (t >= 0.0 && contButton.status === PsychoJS.Status.NOT_STARTED) {
+    // *contButton1* updates
+    if (t >= 0.0 && contButton1.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      contButton.tStart = t;  // (not accounting for frame time here)
-      contButton.frameNStart = frameN;  // exact frame index
+      contButton1.tStart = t;  // (not accounting for frame time here)
+      contButton1.frameNStart = frameN;  // exact frame index
       
-      contButton.setAutoDraw(true);
+      contButton1.setAutoDraw(true);
     }
 
-    // *clickCont* updates
-    if (t >= 0.0 && clickCont.status === PsychoJS.Status.NOT_STARTED) {
+    // *clickCont1* updates
+    if (t >= 0.0 && clickCont1.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      clickCont.tStart = t;  // (not accounting for frame time here)
-      clickCont.frameNStart = frameN;  // exact frame index
+      clickCont1.tStart = t;  // (not accounting for frame time here)
+      clickCont1.frameNStart = frameN;  // exact frame index
       
-      clickCont.status = PsychoJS.Status.STARTED;
-      prevButtonState = clickCont.getPressed();  // if button is down already this ISN'T a new click
+      clickCont1.status = PsychoJS.Status.STARTED;
+      prevButtonState = clickCont1.getPressed();  // if button is down already this ISN'T a new click
       }
-    if (clickCont.status === PsychoJS.Status.STARTED) {  // only update if started and not finished!
-      _mouseButtons = clickCont.getPressed();
+    if (clickCont1.status === PsychoJS.Status.STARTED) {  // only update if started and not finished!
+      _mouseButtons = clickCont1.getPressed();
       if (!_mouseButtons.every( (e,i,) => (e == prevButtonState[i]) )) { // button state changed?
         prevButtonState = _mouseButtons;
         if (_mouseButtons.reduce( (e, acc) => (e+acc) ) > 0) { // state changed to a new click
           // check if the mouse was inside our 'clickable' objects
           gotValidClick = false;
-          for (const obj of [contButton]) {
-            if (obj.contains(clickCont)) {
+          for (const obj of [contButton1]) {
+            if (obj.contains(clickCont1)) {
               gotValidClick = true;
-              clickCont.clicked_name.push(obj.name)
+              clickCont1.clicked_name.push(obj.name)
             }
           }
           if (gotValidClick === true) { // abort routine on response
@@ -510,13 +525,14 @@ var showing_obj;
 var showing_blank;
 var start_timing;
 var end_timing;
-var show_exit;
+var show_continue;
+var end_trial;
+var show_end;
 var clicked_obj;
 var obj_count;
 var task_time_start;
 var task_time_click;
 var task_time_elapsed;
-var n_errors;
 var part1Components;
 function part1RoutineBegin(snapshot) {
   return async function () {
@@ -528,7 +544,14 @@ function part1RoutineBegin(snapshot) {
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
     // update component parameters for each repeat
-    headText.text = `Trial: ${trial_name}`;
+    // setup some python lists for storing info about the clickCont2
+    clickCont2.clicked_name = [];
+    gotValidClick = false; // until a click is received
+    clickCont2.mouseClock.reset();
+    headText.setText(trial_name);
+    if (end_experiment) {
+        continueRoutine = false;
+    }
     idxs = [0, 1, 2, 3, 4, 5, 6, 7];
     util.shuffle(idxs);
     idxs = idxs.slice(0, n_fruits);
@@ -554,18 +577,15 @@ function part1RoutineBegin(snapshot) {
     showing_blank = false;
     start_timing = false;
     end_timing = false;
-    show_exit = false;
+    show_continue = false;
+    end_trial = false;
+    show_end = false;
     clicked_obj = null;
     obj_count = 0;
     task_time_start = null;
     task_time_click = 0;
     task_time_elapsed = 0;
-    n_errors = 0;
     
-    // setup some python lists for storing info about the clickExit
-    clickExit.clicked_name = [];
-    gotValidClick = false; // until a click is received
-    clickExit.mouseClock.reset();
     // keep track of which components have finished
     part1Components = [];
     part1Components.push(box1);
@@ -578,8 +598,9 @@ function part1RoutineBegin(snapshot) {
     part1Components.push(box8);
     part1Components.push(highlighter);
     part1Components.push(blank);
-    part1Components.push(exitButton);
-    part1Components.push(clickExit);
+    part1Components.push(contButton2);
+    part1Components.push(endButton2);
+    part1Components.push(clickCont2);
     part1Components.push(debugTimer);
     part1Components.push(headText);
     
@@ -598,88 +619,6 @@ function part1RoutineEachFrame() {
     t = part1Clock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
-    if (reveal_all) {
-        blank.setAutoDraw(false, {"log": false});
-        highlighter.setAutoDraw(false, {"log": false});
-        if ((t <= reveal_seconds)) {
-            autodraw_all(objs, true);
-        } else {
-            autodraw_all(objs, false);
-            if ((task_time_start === null)) {
-                task_time_start = t;
-            }
-            reveal_all = false;
-        }
-    } else {
-        if ((! end_timing)) {
-            if ((obj_count >= n_fruits)) {
-                end_timing = true;
-            }
-            if (start_timing) {
-                task_time_elapsed = (t - task_time_start);
-            } else {
-                if ((task_time_start !== null)) {
-                    start_timing = true;
-                }
-            }
-        }
-        if (showing_obj) {
-            if (((t - task_time_click) >= OBJ_DURATION)) {
-                clicked_obj.setAutoDraw(false, {"log": false});
-                showing_obj = false;
-                if ((obj_count >= n_fruits)) {
-                    show_exit = true;
-                }
-            }
-        } else {
-            if (showing_blank) {
-                if (((t - task_time_click) >= BLANK_DURATION)) {
-                    blank.setAutoDraw(false, {"log": false});
-                    showing_blank = false;
-                }
-            } else {
-                if (show_exit) {
-                    for (var box, _pj_c = 0, _pj_a = boxes, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
-                        box = _pj_a[_pj_c];
-                        box.setAutoDraw(false, {"log": false});
-                    }
-                } else {
-                    if ((! show_exit)) {
-                        blank.setAutoDraw(false, {"log": false});
-                        highlighter.setAutoDraw(false, {"log": false});
-                        for (var i, _pj_c = 0, _pj_a = util.range(8), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
-                            i = _pj_a[_pj_c];
-                            if (clickExit.isPressedIn(boxes[i])) {
-                                if (boxes_seen[i]) {
-                                    blank.setPos(BOX_POS[i], {"log": false});
-                                    blank.setAutoDraw(true, {"log": false});
-                                    showing_blank = true;
-                                    n_errors += 1;
-                                } else {
-                                    clicked_obj = objs[i];
-                                    clicked_obj.setAutoDraw(true, {"log": false});
-                                    boxes_seen[i] = true;
-                                    obj_count += 1;
-                                    showing_obj = true;
-                                }
-                                clicked_boxes.push(boxes[i].name);
-                                click_times.push(task_time_elapsed);
-                                task_time_click = t;
-                                break;
-                            } else {
-                                if (boxes[i].contains(clickExit)) {
-                                    highlighter.setPos(BOX_POS[i], {"log": false});
-                                    highlighter.setAutoDraw(true, {"log": false});
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
     
     // *box1* updates
     if (t >= 0.0 && box1.status === PsychoJS.Status.NOT_STARTED) {
@@ -781,35 +720,45 @@ function part1RoutineEachFrame() {
     }
 
     
-    // *exitButton* updates
-    if ((show_exit) && exitButton.status === PsychoJS.Status.NOT_STARTED) {
+    // *contButton2* updates
+    if ((show_continue) && contButton2.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      exitButton.tStart = t;  // (not accounting for frame time here)
-      exitButton.frameNStart = frameN;  // exact frame index
+      contButton2.tStart = t;  // (not accounting for frame time here)
+      contButton2.frameNStart = frameN;  // exact frame index
       
-      exitButton.setAutoDraw(true);
+      contButton2.setAutoDraw(true);
     }
 
-    // *clickExit* updates
-    if (t >= 0.0 && clickExit.status === PsychoJS.Status.NOT_STARTED) {
+    
+    // *endButton2* updates
+    if ((show_end) && endButton2.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
-      clickExit.tStart = t;  // (not accounting for frame time here)
-      clickExit.frameNStart = frameN;  // exact frame index
+      endButton2.tStart = t;  // (not accounting for frame time here)
+      endButton2.frameNStart = frameN;  // exact frame index
       
-      clickExit.status = PsychoJS.Status.STARTED;
-      prevButtonState = clickExit.getPressed();  // if button is down already this ISN'T a new click
+      endButton2.setAutoDraw(true);
+    }
+
+    // *clickCont2* updates
+    if (t >= 0.0 && clickCont2.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      clickCont2.tStart = t;  // (not accounting for frame time here)
+      clickCont2.frameNStart = frameN;  // exact frame index
+      
+      clickCont2.status = PsychoJS.Status.STARTED;
+      prevButtonState = clickCont2.getPressed();  // if button is down already this ISN'T a new click
       }
-    if (clickExit.status === PsychoJS.Status.STARTED) {  // only update if started and not finished!
-      _mouseButtons = clickExit.getPressed();
+    if (clickCont2.status === PsychoJS.Status.STARTED) {  // only update if started and not finished!
+      _mouseButtons = clickCont2.getPressed();
       if (!_mouseButtons.every( (e,i,) => (e == prevButtonState[i]) )) { // button state changed?
         prevButtonState = _mouseButtons;
         if (_mouseButtons.reduce( (e, acc) => (e+acc) ) > 0) { // state changed to a new click
           // check if the mouse was inside our 'clickable' objects
           gotValidClick = false;
-          for (const obj of [exitButton]) {
-            if (obj.contains(clickExit)) {
+          for (const obj of [contButton2, endButton2]) {
+            if (obj.contains(clickCont2)) {
               gotValidClick = true;
-              clickExit.clicked_name.push(obj.name)
+              clickCont2.clicked_name.push(obj.name)
             }
           }
           if (gotValidClick === true) { // abort routine on response
@@ -842,6 +791,95 @@ function part1RoutineEachFrame() {
       headText.setAutoDraw(true);
     }
 
+    if ((! end_timing)) {
+        if ((obj_count >= n_fruits)) {
+            end_timing = true;
+        }
+        if (start_timing) {
+            task_time_elapsed = (t - task_time_start);
+        } else {
+            if ((task_time_start !== null)) {
+                start_timing = true;
+            }
+        }
+    }
+    if (reveal_all) {
+        blank.setAutoDraw(false, {"log": false});
+        highlighter.setAutoDraw(false, {"log": false});
+        if ((t <= reveal_seconds)) {
+            set_autodraws(objs, true);
+        } else {
+            set_autodraws(objs, false);
+            if ((task_time_start === null)) {
+                task_time_start = t;
+            }
+            reveal_all = false;
+        }
+    } else {
+        if (showing_obj) {
+            if (((t - task_time_click) >= OBJ_DURATION)) {
+                clicked_obj.setAutoDraw(false, {"log": false});
+                showing_obj = false;
+                if ((obj_count >= n_fruits)) {
+                    show_continue = true;
+                    consec_errors = 0;
+                }
+            }
+        } else {
+            if (showing_blank) {
+                if (((t - task_time_click) >= BLANK_DURATION)) {
+                    blank.setAutoDraw(false, {"log": false});
+                    showing_blank = false;
+                    if (end_trial) {
+                        consec_errors += 1;
+                        if ((consec_errors >= 3)) {
+                            show_end = true;
+                        } else {
+                            show_continue = true;
+                        }
+                    }
+                }
+            } else {
+                if (((! show_continue) && (! show_end))) {
+                    blank.setAutoDraw(false, {"log": false});
+                    highlighter.setAutoDraw(false, {"log": false});
+                    for (var i, _pj_c = 0, _pj_a = util.range(8), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                        i = _pj_a[_pj_c];
+                        if (clickCont2.isPressedIn(boxes[i])) {
+                            if (boxes_seen[i]) {
+                                blank.setPos(BOX_POS[i], {"log": false});
+                                blank.setAutoDraw(true, {"log": false});
+                                showing_blank = true;
+                                end_trial = true;
+                            } else {
+                                clicked_obj = objs[i];
+                                clicked_obj.setAutoDraw(true, {"log": false});
+                                boxes_seen[i] = true;
+                                obj_count += 1;
+                                showing_obj = true;
+                            }
+                            clicked_boxes.push(boxes[i].name);
+                            click_times.push(task_time_elapsed);
+                            task_time_click = t;
+                            break;
+                        } else {
+                            if (boxes[i].contains(clickCont2)) {
+                                highlighter.setPos(BOX_POS[i], {"log": false});
+                                highlighter.setAutoDraw(true, {"log": false});
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    for (var box, _pj_c = 0, _pj_a = boxes, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+                        box = _pj_a[_pj_c];
+                        box.setAutoDraw(false, {"log": false});
+                    }
+                }
+            }
+        }
+    }
+    
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -877,13 +915,18 @@ function part1RoutineEnd() {
         thisComponent.setAutoDraw(false);
       }
     }
-    psychoJS.experiment.addData("clicked_boxes", clicked_boxes);
-    psychoJS.experiment.addData("click_times", click_times);
-    psychoJS.experiment.addData("time_taken_sec", click_times.pop());
-    psychoJS.experiment.addData("correct_boxes", correct_boxes);
-    psychoJS.experiment.addData("n_errors", n_errors);
-    
     // store data for psychoJS.experiment (ExperimentHandler)
+    if ((! end_experiment)) {
+        psychoJS.experiment.addData("clicked_boxes", clicked_boxes);
+        psychoJS.experiment.addData("click_times", click_times);
+        psychoJS.experiment.addData("time_taken_sec", click_times.pop());
+        psychoJS.experiment.addData("correct_boxes", correct_boxes);
+        psychoJS.experiment.addData("consec_errors", consec_errors);
+    }
+    if ((consec_errors >= 3)) {
+        end_experiment = true;
+    }
+    
     // the Routine "part1" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
@@ -928,6 +971,8 @@ async function quitPsychoJS(message, isCompleted) {
   if (psychoJS.experiment.isEntryEmpty()) {
     psychoJS.experiment.nextEntry();
   }
+  
+  
   
   
   psychoJS.window.close();

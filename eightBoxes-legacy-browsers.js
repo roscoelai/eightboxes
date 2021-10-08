@@ -49,16 +49,16 @@ psychoJS.start({
   expName: expName,
   expInfo: expInfo,
   resources: [
-    {'name': 'imgs/watermelon.png', 'path': 'imgs/watermelon.png'},
+    {'name': 'imgs/pear.png', 'path': 'imgs/pear.png'},
+    {'name': 'imgs/empty-box.png', 'path': 'imgs/empty-box.png'},
     {'name': 'imgs/continue.png', 'path': 'imgs/continue.png'},
     {'name': 'imgs/strawberry.png', 'path': 'imgs/strawberry.png'},
-    {'name': 'imgs/grapes.png', 'path': 'imgs/grapes.png'},
-    {'name': 'imgs/empty-box.png', 'path': 'imgs/empty-box.png'},
-    {'name': 'imgs/end-experiment.png', 'path': 'imgs/end-experiment.png'},
-    {'name': 'imgs/pear.png', 'path': 'imgs/pear.png'},
-    {'name': 'imgs/banana.png', 'path': 'imgs/banana.png'},
+    {'name': 'imgs/watermelon.png', 'path': 'imgs/watermelon.png'},
+    {'name': 'conditions.csv', 'path': 'conditions.csv'},
     {'name': 'imgs/apple.png', 'path': 'imgs/apple.png'},
-    {'name': 'conditions.csv', 'path': 'conditions.csv'}
+    {'name': 'imgs/grapes.png', 'path': 'imgs/grapes.png'},
+    {'name': 'imgs/end-experiment.png', 'path': 'imgs/end-experiment.png'},
+    {'name': 'imgs/banana.png', 'path': 'imgs/banana.png'}
   ]
 });
 
@@ -95,7 +95,9 @@ var DEBUG;
 var OBJ_DURATION;
 var SHOW_TIMER;
 var BLANK_DURATION;
+var HALF_LENGTH;
 var b;
+var l;
 var BOX_SIZE;
 var BOX_FILL_COLOR;
 var BOX_LINE_COLOR;
@@ -103,7 +105,7 @@ var BOX_OPACITY;
 var OBJ_SIZE;
 var BLANK_SIZE;
 var BOX_POS;
-var set_autodraws;
+var IMG_SRCS;
 var box1;
 var box2;
 var box3;
@@ -119,10 +121,12 @@ var endButton2;
 var clickCont2;
 var debugTimer;
 var headText;
-var end_experiment;
+var terminate_experiment;
 var consec_errors;
-var IMG_SRCS;
 var objs6;
+var idxs8;
+var boxes;
+var set_autodraws;
 var globalClock;
 var routineTimer;
 async function experimentInit() {
@@ -131,7 +135,7 @@ async function experimentInit() {
   instr1 = new visual.TextStim({
     win: psychoJS.window,
     name: 'instr1',
-    text: 'Instructions:\n\n- There will be 8 boxes on the screen\n- Some boxes will contain (a picture of) a fruit\n- Their positions will be revealed for a short period of time before being hidden\n- As fast as you can, find all the hidden fruits without clicking on empty boxes\n- Errors will be recorded\n- Time taken will be recorded (starting from when the fruits are hidden)\n- Once a fruit has been "found" the box will become empty\n- There will be a practice trial, followed by 6 trials\n\nDevelopment/Debugging:\n- Picture/Blank show duration set to 1 second to speed up trials\n- No inter-trial instructions\n- Errors do not cause trial to end prematurely, yet\n- There is a very inconspicuous timer near the bottom-right of the screen\n',
+    text: 'Instructions:\n\n- There will be 8 boxes on the screen\n- Some boxes will contain (a picture of) a fruit\n- Their positions will be revealed for a short period of time before being hidden\n- As fast as you can, find all the hidden fruits without clicking on empty boxes\n- Errors will be recorded\n- Time taken will be recorded (starting from when the fruits are hidden)\n- Once a fruit has been "found" the box will become empty\n- There will be a practice trial, followed by 6 trials\n\nDevelopment/Debugging:\n- Picture/Blank show duration set to 1 second to speed up trials\n- No inter-trial instructions\n- There is a very inconspicuous timer near the bottom-right of the screen\n',
     font: 'Open Sans',
     units: undefined, 
     pos: [0, 0], height: 0.025,  wrapWidth: 0.98, ori: 0.0,
@@ -162,23 +166,17 @@ async function experimentInit() {
       SHOW_TIMER = true;
   }
   BLANK_DURATION = OBJ_DURATION;
-  b = 0.1;
-  BOX_SIZE = [(2 * b), (2 * b)];
+  HALF_LENGTH = 0.1;
+  b = HALF_LENGTH;
+  l = (b * 2);
+  BOX_SIZE = [l, l];
   BOX_FILL_COLOR = "black";
   BOX_LINE_COLOR = "black";
   BOX_OPACITY = 0.3;
-  OBJ_SIZE = [(1.8 * b), (1.8 * b)];
+  OBJ_SIZE = [(0.9 * l), (0.9 * l)];
   BLANK_SIZE = OBJ_SIZE;
   BOX_POS = [[((- 3) * b), b], [(- b), b], [b, b], [(3 * b), b], [((- 3) * b), (- b)], [(- b), (- b)], [b, (- b)], [(3 * b), (- b)]];
-  function _set_autodraws(objs, t_f) {
-      for (var obj, _pj_c = 0, _pj_a = objs, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
-          obj = _pj_a[_pj_c];
-          if ((obj !== null)) {
-              obj.setAutoDraw(t_f, {"log": false});
-          }
-      }
-  }
-  set_autodraws = _set_autodraws;
+  IMG_SRCS = ["imgs/apple.png", "imgs/banana.png", "imgs/grapes.png", "imgs/pear.png", "imgs/strawberry.png", "imgs/watermelon.png"];
   
   box1 = new visual.Rect ({
     win: psychoJS.window, name: 'box1', 
@@ -314,14 +312,24 @@ async function experimentInit() {
     depth: -15.0 
   });
   
-  end_experiment = false;
+  terminate_experiment = false;
   consec_errors = 0;
-  IMG_SRCS = ["imgs/apple.png", "imgs/banana.png", "imgs/grapes.png", "imgs/pear.png", "imgs/strawberry.png", "imgs/watermelon.png"];
   objs6 = [];
   for (var i, _pj_c = 0, _pj_a = util.range(6), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
       i = _pj_a[_pj_c];
       objs6.push(new visual.ImageStim({"win": psychoJS.window, "name": `obj${(i + 1)}`, "image": IMG_SRCS[i], "pos": [1.0, 1.0], "size": OBJ_SIZE}));
   }
+  idxs8 = [0, 1, 2, 3, 4, 5, 6, 7];
+  boxes = [box1, box2, box3, box4, box5, box6, box7, box8];
+  function _set_autodraws(objs, t_f) {
+      for (var obj, _pj_c = 0, _pj_a = objs, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+          obj = _pj_a[_pj_c];
+          if ((obj !== null)) {
+              obj.setAutoDraw(t_f, {"log": false});
+          }
+      }
+  }
+  set_autodraws = _set_autodraws;
   
   // Create some handy timers
   globalClock = new util.Clock();  // to track the time since experiment started
@@ -506,21 +514,18 @@ async function trialsLoopEnd() {
 }
 
 
-var idxs;
-var boxes;
 var boxes_seen;
 var objs;
-var obj_i;
-var correct_boxes;
 var clicked_boxes;
 var click_times;
-var reveal_all;
+var obj_i;
+var correct_boxes;
+var mouse_active;
+var initial_reveal;
 var showing_obj;
 var showing_blank;
-var start_timing;
-var end_timing;
+var update_time_elapsed;
 var show_continue;
-var end_trial;
 var show_end;
 var clicked_obj;
 var obj_count;
@@ -543,36 +548,32 @@ function part1RoutineBegin(snapshot) {
     gotValidClick = false; // until a click is received
     clickCont2.mouseClock.reset();
     headText.setText(trial_name);
-    if (end_experiment) {
+    if (terminate_experiment) {
         continueRoutine = false;
     }
-    idxs = [0, 1, 2, 3, 4, 5, 6, 7];
-    util.shuffle(idxs);
-    idxs = idxs.slice(0, n_fruits);
     util.shuffle(objs6);
-    boxes = [box1, box2, box3, box4, box5, box6, box7, box8];
+    util.shuffle(idxs8);
     boxes_seen = [true, true, true, true, true, true, true, true];
     objs = [null, null, null, null, null, null, null, null];
+    clicked_boxes = [];
+    click_times = [];
     obj_i = 0;
     correct_boxes = [];
-    for (var idx, _pj_c = 0, _pj_a = idxs, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+    for (var idx, _pj_c = 0, _pj_a = idxs8.slice(0, n_fruits), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
         idx = _pj_a[_pj_c];
         objs[idx] = objs6[obj_i];
-        obj_i += 1;
         objs[idx].setPos(BOX_POS[idx], {"log": false});
+        obj_i += 1;
         boxes_seen[idx] = false;
         correct_boxes.push(`box${(idx + 1)}`);
     }
     correct_boxes.sort();
-    clicked_boxes = [];
-    click_times = [];
-    reveal_all = true;
+    mouse_active = false;
+    initial_reveal = true;
     showing_obj = false;
     showing_blank = false;
-    start_timing = false;
-    end_timing = false;
+    update_time_elapsed = false;
     show_continue = false;
-    end_trial = false;
     show_end = false;
     clicked_obj = null;
     obj_count = 0;
@@ -735,7 +736,7 @@ function part1RoutineEachFrame() {
     }
 
     // *clickCont2* updates
-    if (t >= 0.0 && clickCont2.status === PsychoJS.Status.NOT_STARTED) {
+    if ((mouse_active) && clickCont2.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
       clickCont2.tStart = t;  // (not accounting for frame time here)
       clickCont2.frameNStart = frameN;  // exact frame index
@@ -786,19 +787,10 @@ function part1RoutineEachFrame() {
       headText.setAutoDraw(true);
     }
 
-    if ((! end_timing)) {
-        if ((obj_count >= n_fruits)) {
-            end_timing = true;
-        }
-        if (start_timing) {
-            task_time_elapsed = (t - task_time_start);
-        } else {
-            if ((task_time_start !== null)) {
-                start_timing = true;
-            }
-        }
+    if (update_time_elapsed) {
+        task_time_elapsed = (t - task_time_start);
     }
-    if (reveal_all) {
+    if (initial_reveal) {
         blank.setAutoDraw(false, {"log": false});
         highlighter.setAutoDraw(false, {"log": false});
         if ((t <= reveal_seconds)) {
@@ -807,8 +799,10 @@ function part1RoutineEachFrame() {
             set_autodraws(objs, false);
             if ((task_time_start === null)) {
                 task_time_start = t;
+                update_time_elapsed = true;
             }
-            reveal_all = false;
+            initial_reveal = false;
+            mouse_active = true;
         }
     } else {
         if (showing_obj) {
@@ -825,17 +819,17 @@ function part1RoutineEachFrame() {
                 if (((t - task_time_click) >= BLANK_DURATION)) {
                     blank.setAutoDraw(false, {"log": false});
                     showing_blank = false;
-                    if (end_trial) {
-                        consec_errors += 1;
-                        if ((consec_errors >= 3)) {
-                            show_end = true;
-                        } else {
-                            show_continue = true;
-                        }
+                    consec_errors += 1;
+                    if ((consec_errors >= 3)) {
+                        show_end = true;
+                    } else {
+                        show_continue = true;
                     }
                 }
             } else {
-                if (((! show_continue) && (! show_end))) {
+                if ((show_continue || show_end)) {
+                    set_autodraws(boxes, false);
+                } else {
                     blank.setAutoDraw(false, {"log": false});
                     highlighter.setAutoDraw(false, {"log": false});
                     for (var i, _pj_c = 0, _pj_a = util.range(8), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
@@ -845,13 +839,16 @@ function part1RoutineEachFrame() {
                                 blank.setPos(BOX_POS[i], {"log": false});
                                 blank.setAutoDraw(true, {"log": false});
                                 showing_blank = true;
-                                end_trial = true;
+                                update_time_elapsed = false;
                             } else {
                                 clicked_obj = objs[i];
                                 clicked_obj.setAutoDraw(true, {"log": false});
                                 boxes_seen[i] = true;
                                 obj_count += 1;
                                 showing_obj = true;
+                                if ((obj_count >= n_fruits)) {
+                                    update_time_elapsed = false;
+                                }
                             }
                             clicked_boxes.push(boxes[i].name);
                             click_times.push(task_time_elapsed);
@@ -864,11 +861,6 @@ function part1RoutineEachFrame() {
                                 break;
                             }
                         }
-                    }
-                } else {
-                    for (var box, _pj_c = 0, _pj_a = boxes, _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
-                        box = _pj_a[_pj_c];
-                        box.setAutoDraw(false, {"log": false});
                     }
                 }
             }
@@ -911,7 +903,7 @@ function part1RoutineEnd() {
       }
     });
     // store data for psychoJS.experiment (ExperimentHandler)
-    if ((! end_experiment)) {
+    if ((! terminate_experiment)) {
         psychoJS.experiment.addData("clicked_boxes", clicked_boxes);
         psychoJS.experiment.addData("click_times", click_times);
         psychoJS.experiment.addData("time_taken_sec", click_times.pop());
@@ -919,7 +911,7 @@ function part1RoutineEnd() {
         psychoJS.experiment.addData("consec_errors", consec_errors);
     }
     if ((consec_errors >= 3)) {
-        end_experiment = true;
+        terminate_experiment = true;
     }
     
     // the Routine "part1" was not non-slip safe, so reset the non-slip timer

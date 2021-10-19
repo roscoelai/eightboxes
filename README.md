@@ -1,1 +1,1 @@
-# eightboxes
+# Eight Boxes (Fruits) Demo

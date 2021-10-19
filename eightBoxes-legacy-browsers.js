@@ -401,6 +401,7 @@ var click_times;
 var visible;
 var visible_t;
 var initial_reveal;
+var first_click;
 var update_time_elapsed;
 var show_continue;
 var trial_stop;
@@ -452,6 +453,7 @@ function part1RoutineBegin(snapshot) {
     visible = [false, false, false, false, false, false, false, false];
     visible_t = [null, null, null, null, null, null, null, null];
     initial_reveal = true;
+    first_click = true;
     update_time_elapsed = false;
     show_continue = false;
     trial_stop = false;
@@ -535,8 +537,6 @@ function part1RoutineEachFrame() {
                         obj.setAutoDraw(false, {"log": false});
                     }
                     highlighter.setSize(BOX_SIZE, {"log": false});
-                    task_time_start = t;
-                    update_time_elapsed = true;
                     initial_reveal = false;
                 }
             } else {
@@ -546,6 +546,11 @@ function part1RoutineEachFrame() {
                         continue;
                     }
                     if (mouse2.isPressedIn(boxes[i])) {
+                        if (first_click) {
+                            task_time_start = t;
+                            update_time_elapsed = true;
+                            first_click = false;
+                        }
                         clicked_boxes.push(boxes[i].name);
                         click_times.push(task_time_elapsed);
                         visible[i] = true;

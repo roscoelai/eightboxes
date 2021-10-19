@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" ?>
+<PsychoPy2experiment encoding="utf-8" version="2021.2.3">
+  <Settings>
+    <Param name="Audio latency priority" updates="None" val="use prefs" valType="str"/>
+    <Param name="Audio lib" updates="None" val="use prefs" valType="str"/>
+    <Param name="Completed URL" updates="None" val="" valType="str"/>
+    <Param name="Data file delimiter" updates="None" val="auto" valType="str"/>
+    <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
+    <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
+    <Param name="Experiment info" updates="None" val="{'participant': ''}" valType="code"/>
+    <Param name="Force stereo" updates="None" val="True" valType="bool"/>
+    <Param name="Full-screen window" updates="None" val="True" valType="bool"/>
+    <Param name="HTML path" updates="None" val="" valType="str"/>
+    <Param name="Incomplete URL" updates="None" val="" valType="str"/>
+    <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
+    <Param name="Resources" updates="None" val="['conditions.csv', 'imgs\\box.png', 'imgs\\apple.png', 'imgs\\banana.png', 'imgs\\continue.png', 'imgs\\empty-box.png', 'imgs\\end-experiment.png', 'imgs\\grapes.png', 'imgs\\pear.png', 'imgs\\strawberry.png', 'imgs\\watermelon.png']" valType="list"/>
+    <Param name="Save csv file" updates="None" val="False" valType="bool"/>
+    <Param name="Save excel file" updates="None" val="False" valType="bool"/>
+    <Param name="Save hdf5 file" updates="None" val="False" valType="bool"/>
+    <Param name="Save log file" updates="None" val="True" valType="bool"/>
+    <Param name="Save psydat file" updates="None" val="True" valType="bool"/>
+    <Param name="Save wide csv file" updates="None" val="True" valType="bool"/>
+    <Param name="Screen" updates="None" val="1" valType="num"/>
+    <Param name="Show info dlg" updates="None" val="True" valType="bool"/>
+    <Param name="Show mouse" updates="None" val="False" valType="bool"/>
+    <Param name="Units" updates="None" val="height" valType="str"/>
+    <Param name="Use version" updates="None" val="" valType="str"/>
+    <Param name="Window size (pixels)" updates="None" val="[1536, 864]" valType="list"/>
+    <Param name="blendMode" updates="None" val="avg" valType="str"/>
+    <Param name="color" updates="None" val="$[0,0,0]" valType="color"/>
+    <Param name="colorSpace" updates="None" val="rgb" valType="str"/>
+    <Param name="elAddress" updates="None" val="100.1.1.1" valType="str"/>
+    <Param name="elDataFiltering" updates="None" val="FILTER_LEVEL_2" valType="str"/>
+    <Param name="elLiveFiltering" updates="None" val="FILTER_LEVEL_OFF" valType="str"/>
+    <Param name="elModel" updates="None" val="EYELINK 1000 DESKTOP" valType="str"/>
+    <Param name="elPupilAlgorithm" updates="None" val="ELLIPSE_FIT" valType="str"/>
+    <Param name="elPupilMeasure" updates="None" val="PUPIL_AREA" valType="str"/>
+    <Param name="elSampleRate" updates="None" val="1000" valType="num"/>
+    <Param name="elSimMode" updates="None" val="False" valType="bool"/>
+    <Param name="elTrackEyes" updates="None" val="RIGHT_EYE" valType="str"/>
+    <Param name="elTrackingMode" updates="None" val="PUPIL_CR_TRACKING" valType="str"/>
+    <Param name="expName" updates="None" val="eightBoxes" valType="str"/>
+    <Param name="exportHTML" updates="None" val="on Sync" valType="str"/>
+    <Param name="eyetracker" updates="None" val="None" valType="str"/>
+    <Param name="gpAddress" updates="None" val="127.0.0.1" valType="str"/>
+    <Param name="gpPort" updates="None" val="4242" valType="num"/>
+    <Param name="logging level" updates="None" val="exp" valType="code"/>
+    <Param name="mgBlink" updates="None" val="('MIDDLE_BUTTON',)" valType="list"/>
+    <Param name="mgMove" updates="None" val="CONTINUOUS" valType="str"/>
+    <Param name="mgSaccade" updates="None" val="0.5" valType="num"/>
+    <Param name="tbLicenseFile" updates="None" val="" valType="str"/>
+    <Param name="tbModel" updates="None" val="" valType="str"/>
+    <Param name="tbSampleRate" updates="None" val="60" valType="num"/>
+    <Param name="tbSerialNo" updates="None" val="" valType="str"/>
+  </Settings>
+  <Routines>
+    <Routine name="part1">
+      <CodeComponent name="code2">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="&amp;#10;DEBUG = True&amp;#10;RANDOMIZE = True&amp;#10;&amp;#10;# Half-width of side of square (% screen height)&amp;#10;BOX_HALF_WIDTH = 0.1&amp;#10;&amp;#10;box_width = BOX_HALF_WIDTH * 2&amp;#10;obj_width = box_width * 0.9&amp;#10;&amp;#10;if DEBUG:&amp;#10;    OBJ_DURATION = 1.0&amp;#10;    SHOW_TIMER = True&amp;#10;else:&amp;#10;    OBJ_DURATION = 3.0 # Seconds (set to 3.0)&amp;#10;    SHOW_TIMER = False # Set to False&amp;#10;&amp;#10;BLANK_DURATION = OBJ_DURATION&amp;#10;&amp;#10;BOX_SIZE = (box_width, box_width)&amp;#10;OBJ_SIZE = (obj_width, obj_width)&amp;#10;&amp;#10;BLANK_SIZE = OBJ_SIZE&amp;#10;&amp;#10;# Boxes ------------------------------------------&amp;#10;&amp;#10;BOX_POS = (&amp;#10;    (-3 * BOX_HALF_WIDTH,  BOX_HALF_WIDTH),&amp;#10;    (    -BOX_HALF_WIDTH,  BOX_HALF_WIDTH),&amp;#10;    (     BOX_HALF_WIDTH,  BOX_HALF_WIDTH),&amp;#10;    ( 3 * BOX_HALF_WIDTH,  BOX_HALF_WIDTH),&amp;#10;    (-3 * BOX_HALF_WIDTH, -BOX_HALF_WIDTH),&amp;#10;    (    -BOX_HALF_WIDTH, -BOX_HALF_WIDTH),&amp;#10;    (     BOX_HALF_WIDTH, -BOX_HALF_WIDTH),&amp;#10;    ( 3 * BOX_HALF_WIDTH, -BOX_HALF_WIDTH),&amp;#10;)&amp;#10;&amp;#10;boxes = []&amp;#10;for i in range(8):&amp;#10;    boxes.append(visual.ImageStim(&amp;#10;        win=win,&amp;#10;        name=f&quot;box{i + 1}&quot;,&amp;#10;        image=&quot;imgs/box.png&quot;,&amp;#10;        pos=BOX_POS[i],&amp;#10;        size=BOX_SIZE,&amp;#10;        opacity=0.5&amp;#10;    ))&amp;#10;&amp;#10;highlighter = visual.ImageStim(&amp;#10;    win=win,&amp;#10;    name=&quot;highlighter&quot;,&amp;#10;    image=&quot;imgs/box.png&quot;,&amp;#10;    pos=BOX_POS[i],&amp;#10;    size=BOX_SIZE,&amp;#10;    opacity=0.5&amp;#10;)&amp;#10;&amp;#10;# Objects ----------------------------------------&amp;#10;&amp;#10;IMG_PATHS = (&amp;#10;    &quot;imgs/apple.png&quot;,&amp;#10;    &quot;imgs/banana.png&quot;,&amp;#10;    &quot;imgs/grapes.png&quot;,&amp;#10;    &quot;imgs/pear.png&quot;,&amp;#10;    &quot;imgs/strawberry.png&quot;,&amp;#10;    &quot;imgs/watermelon.png&quot;,&amp;#10;)&amp;#10;&amp;#10;objs6 = []&amp;#10;for i in range(6):&amp;#10;    objs6.append(visual.ImageStim(&amp;#10;        win=win,&amp;#10;        name=f&quot;obj{i + 1}&quot;,&amp;#10;        image=IMG_PATHS[i],&amp;#10;        pos=(0, 0),&amp;#10;        size=OBJ_SIZE,&amp;#10;        opacity=1.0&amp;#10;    ))&amp;#10;&amp;#10;# Fixed positions --------------------------------&amp;#10;&amp;#10;if not RANDOMIZE:&amp;#10;    OBJ_POS = {&amp;#10;        &quot;Practice trial&quot;: [2, 5],&amp;#10;        &quot;Trial 1&quot;: [1, 7],&amp;#10;        &quot;Trial 2&quot;: [0, 3, 5],&amp;#10;        &quot;Trial 3&quot;: [1, 2, 4, 6],&amp;#10;        &quot;Trial 4&quot;: [1, 3, 4, 7],&amp;#10;        &quot;Trial 5&quot;: [0, 2, 4, 6, 7],&amp;#10;        &quot;Trial 6&quot;: [0, 2, 3, 4, 5, 7],&amp;#10;    }&amp;#10;&amp;#10;# Others -----------------------------------------&amp;#10;&amp;#10;CONT_BUTTON_SIZE = (0.32, 0.112)&amp;#10;&amp;#10;cont_button = visual.ImageStim(&amp;#10;    win=win,&amp;#10;    name=&quot;cont_button&quot;,&amp;#10;    image=&quot;imgs/continue.png&quot;,&amp;#10;    pos=(0, -0.4),&amp;#10;    size=(0, 0)&amp;#10;)&amp;#10;&amp;#10;idxs8 = [0, 1, 2, 3, 4, 5, 6, 7]&amp;#10;idx = None&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="DEBUG = true;&amp;#10;RANDOMIZE = true;&amp;#10;BOX_HALF_WIDTH = 0.1;&amp;#10;box_width = (BOX_HALF_WIDTH * 2);&amp;#10;obj_width = (box_width * 0.9);&amp;#10;if (DEBUG) {&amp;#10;    OBJ_DURATION = 1.0;&amp;#10;    SHOW_TIMER = true;&amp;#10;} else {&amp;#10;    OBJ_DURATION = 3.0;&amp;#10;    SHOW_TIMER = false;&amp;#10;}&amp;#10;BLANK_DURATION = OBJ_DURATION;&amp;#10;BOX_SIZE = [box_width, box_width];&amp;#10;OBJ_SIZE = [obj_width, obj_width];&amp;#10;BLANK_SIZE = OBJ_SIZE;&amp;#10;BOX_POS = [[((- 3) * BOX_HALF_WIDTH), BOX_HALF_WIDTH], [(- BOX_HALF_WIDTH), BOX_HALF_WIDTH], [BOX_HALF_WIDTH, BOX_HALF_WIDTH], [(3 * BOX_HALF_WIDTH), BOX_HALF_WIDTH], [((- 3) * BOX_HALF_WIDTH), (- BOX_HALF_WIDTH)], [(- BOX_HALF_WIDTH), (- BOX_HALF_WIDTH)], [BOX_HALF_WIDTH, (- BOX_HALF_WIDTH)], [(3 * BOX_HALF_WIDTH), (- BOX_HALF_WIDTH)]];&amp;#10;boxes = [];&amp;#10;for (var i, _pj_c = 0, _pj_a = util.range(8), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    i = _pj_a[_pj_c];&amp;#10;    boxes.push(new visual.ImageStim({&quot;win&quot;: psychoJS.window, &quot;name&quot;: `box${(i + 1)}`, &quot;image&quot;: &quot;imgs/box.png&quot;, &quot;pos&quot;: BOX_POS[i], &quot;size&quot;: BOX_SIZE, &quot;opacity&quot;: 0.5}));&amp;#10;}&amp;#10;highlighter = new visual.ImageStim({&quot;win&quot;: psychoJS.window, &quot;name&quot;: &quot;highlighter&quot;, &quot;image&quot;: &quot;imgs/box.png&quot;, &quot;pos&quot;: BOX_POS[i], &quot;size&quot;: BOX_SIZE, &quot;opacity&quot;: 0.5});&amp;#10;IMG_PATHS = [&quot;imgs/apple.png&quot;, &quot;imgs/banana.png&quot;, &quot;imgs/grapes.png&quot;, &quot;imgs/pear.png&quot;, &quot;imgs/strawberry.png&quot;, &quot;imgs/watermelon.png&quot;];&amp;#10;objs6 = [];&amp;#10;for (var i, _pj_c = 0, _pj_a = util.range(6), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    i = _pj_a[_pj_c];&amp;#10;    objs6.push(new visual.ImageStim({&quot;win&quot;: psychoJS.window, &quot;name&quot;: `obj${(i + 1)}`, &quot;image&quot;: IMG_PATHS[i], &quot;pos&quot;: [0, 0], &quot;size&quot;: OBJ_SIZE, &quot;opacity&quot;: 1.0}));&amp;#10;}&amp;#10;if ((! RANDOMIZE)) {&amp;#10;    OBJ_POS = {&quot;Practice trial&quot;: [2, 5], &quot;Trial 1&quot;: [1, 7], &quot;Trial 2&quot;: [0, 3, 5], &quot;Trial 3&quot;: [1, 2, 4, 6], &quot;Trial 4&quot;: [1, 3, 4, 7], &quot;Trial 5&quot;: [0, 2, 4, 6, 7], &quot;Trial 6&quot;: [0, 2, 3, 4, 5, 7]};&amp;#10;}&amp;#10;CONT_BUTTON_SIZE = [0.32, 0.112];&amp;#10;cont_button = new visual.ImageStim({&quot;win&quot;: psychoJS.window, &quot;name&quot;: &quot;cont_button&quot;, &quot;image&quot;: &quot;imgs/continue.png&quot;, &quot;pos&quot;: [0, (- 0.4)], &quot;size&quot;: [0, 0]});&amp;#10;idxs8 = [0, 1, 2, 3, 4, 5, 6, 7];&amp;#10;idx = null;&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="cont_button.setSize([0, 0], {&quot;log&quot;: false});&amp;#10;cont_button.setAutoDraw(false, {&quot;log&quot;: false});&amp;#10;for (var box, _pj_c = 0, _pj_a = boxes, _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    box = _pj_a[_pj_c];&amp;#10;    box.autoDraw = true;&amp;#10;}&amp;#10;if (RANDOMIZE) {&amp;#10;    util.shuffle(objs6);&amp;#10;    util.shuffle(idxs8);&amp;#10;    idxs = idxs8.slice(0, n_fruits);&amp;#10;} else {&amp;#10;    idxs = OBJ_POS[trial_name];&amp;#10;}&amp;#10;objs = [null, null, null, null, null, null, null, null];&amp;#10;correct_boxes = [];&amp;#10;for (var i, _pj_c = 0, _pj_a = util.range(n_fruits), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    i = _pj_a[_pj_c];&amp;#10;    idx = idxs[i];&amp;#10;    objs[idx] = objs6[i];&amp;#10;    objs[idx].setPos(BOX_POS[idx], {&quot;log&quot;: false});&amp;#10;    correct_boxes.push(`box${(idx + 1)}`);&amp;#10;}&amp;#10;correct_boxes.sort();&amp;#10;for (var i, _pj_c = 0, _pj_a = util.range(8), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    i = _pj_a[_pj_c];&amp;#10;    if ((objs[i] === null)) {&amp;#10;        objs[i] = new visual.ImageStim({&quot;win&quot;: psychoJS.window, &quot;name&quot;: `blank${(i + 1)}`, &quot;image&quot;: &quot;imgs/empty-box.png&quot;, &quot;pos&quot;: BOX_POS[i], &quot;size&quot;: BLANK_SIZE});&amp;#10;    }&amp;#10;}&amp;#10;clicked_boxes = [];&amp;#10;click_times = [];&amp;#10;visible = [false, false, false, false, false, false, false, false];&amp;#10;visible_t = [null, null, null, null, null, null, null, null];&amp;#10;initial_reveal = true;&amp;#10;update_time_elapsed = false;&amp;#10;show_continue = false;&amp;#10;trial_stop = false;&amp;#10;obj_count = 0;&amp;#10;task_time_start = null;&amp;#10;task_time_elapsed = 0;&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="&amp;#10;cont_button.setSize((0, 0), log=False)&amp;#10;cont_button.setAutoDraw(False, log=False)&amp;#10;&amp;#10;for box in boxes:&amp;#10;    box.autoDraw = True&amp;#10;&amp;#10;if RANDOMIZE:&amp;#10;    # Shuffle objects and indices&amp;#10;    shuffle(objs6)&amp;#10;    shuffle(idxs8)&amp;#10;    idxs = idxs8[:n_fruits]&amp;#10;else:&amp;#10;    idxs = OBJ_POS[trial_name]&amp;#10;&amp;#10;objs = [None, None, None, None, None, None, None, None]&amp;#10;correct_boxes = []&amp;#10;for i in range(n_fruits):&amp;#10;    idx = idxs[i]&amp;#10;    objs[idx] = objs6[i]&amp;#10;    objs[idx].setPos(BOX_POS[idx], log=False)&amp;#10;    correct_boxes.append(f&quot;box{idx + 1}&quot;)&amp;#10;correct_boxes.sort()&amp;#10;&amp;#10;# Fill the rest with blanks&amp;#10;for i in range(8):&amp;#10;    if objs[i] is None:&amp;#10;        objs[i] = visual.ImageStim(&amp;#10;            win=win,&amp;#10;            name=f&quot;blank{i + 1}&quot;,&amp;#10;            image=&quot;imgs/empty-box.png&quot;,&amp;#10;            pos=BOX_POS[i],&amp;#10;            size=BLANK_SIZE&amp;#10;        )&amp;#10;&amp;#10;# ----&amp;#10;&amp;#10;# Collections&amp;#10;clicked_boxes = []&amp;#10;click_times = []&amp;#10;&amp;#10;visible = [False, False, False, False, False, False, False, False]&amp;#10;visible_t = [None, None, None, None, None, None, None, None]&amp;#10;&amp;#10;# Flags&amp;#10;initial_reveal = True&amp;#10;update_time_elapsed = False&amp;#10;show_continue = False&amp;#10;trial_stop = False&amp;#10;&amp;#10;# Variables&amp;#10;obj_count = 0&amp;#10;task_time_start = None&amp;#10;task_time_elapsed = 0&amp;#10;" valType="extendedCode"/>
+        <Param name="Code Type" updates="None" val="Auto-&gt;JS" valType="str"/>
+        <Param name="Each Frame" updates="constant" val="&amp;#10;if update_time_elapsed:&amp;#10;    task_time_elapsed = t - task_time_start&amp;#10;&amp;#10;if trial_stop:&amp;#10;    pass&amp;#10;elif show_continue:&amp;#10;    for box in boxes:&amp;#10;        if box is not None:&amp;#10;            box.setAutoDraw(False, log=False)&amp;#10;    cont_button.setSize(CONT_BUTTON_SIZE, log=False)&amp;#10;    cont_button.setAutoDraw(True, log=False)&amp;#10;    highlighter.setSize((0, 0), log=False)&amp;#10;    trial_stop = True&amp;#10;elif initial_reveal:&amp;#10;    for obj in objs:&amp;#10;        if &quot;obj&quot; in obj.name:&amp;#10;            obj.draw()&amp;#10;    if t &gt; reveal_seconds:&amp;#10;        for obj in objs:&amp;#10;            obj.setAutoDraw(False, log=False)&amp;#10;        highlighter.setSize(BOX_SIZE, log=False)&amp;#10;        task_time_start = t&amp;#10;        update_time_elapsed = True&amp;#10;        initial_reveal = False&amp;#10;else:&amp;#10;    for i in range(8):&amp;#10;        if visible[i]:&amp;#10;            continue&amp;#10;        if mouse2.isPressedIn(boxes[i]):&amp;#10;            clicked_boxes.append(boxes[i].name)&amp;#10;            click_times.append(task_time_elapsed)&amp;#10;            visible[i] = True&amp;#10;            visible_t[i] = t&amp;#10;            objs[i].setAutoDraw(True, log=False)&amp;#10;            if &quot;blank&quot; not in objs[i].name:&amp;#10;                obj_count += 1&amp;#10;                if obj_count &gt;= n_fruits:&amp;#10;                    update_time_elapsed = False&amp;#10;            break&amp;#10;        elif boxes[i].contains(mouse2):&amp;#10;            highlighter.setPos(boxes[i].pos, log=False)&amp;#10;            highlighter.draw()&amp;#10;            break&amp;#10;&amp;#10;for i in range(8):&amp;#10;    if visible[i] and t - visible_t[i] &gt;= OBJ_DURATION:&amp;#10;        objs[i].setAutoDraw(False, log=False)&amp;#10;        objs[i] = visual.ImageStim(&amp;#10;            win=win,&amp;#10;            name=f&quot;{objs[i].name}_blank&quot;,&amp;#10;            image=&quot;imgs/empty-box.png&quot;,&amp;#10;            pos=BOX_POS[i],&amp;#10;            size=BLANK_SIZE&amp;#10;        )&amp;#10;        visible[i] = False&amp;#10;&amp;#10;if sum(visible) &lt;= 0 and obj_count &gt;= n_fruits:&amp;#10;    show_continue = True&amp;#10;" valType="extendedCode"/>
+        <Param name="Each JS Frame" updates="constant" val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;if (update_time_elapsed) {&amp;#10;    task_time_elapsed = (t - task_time_start);&amp;#10;}&amp;#10;if (trial_stop) {&amp;#10;} else {&amp;#10;    if (show_continue) {&amp;#10;        for (var box, _pj_c = 0, _pj_a = boxes, _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;            box = _pj_a[_pj_c];&amp;#10;            if ((box !== null)) {&amp;#10;                box.setAutoDraw(false, {&quot;log&quot;: false});&amp;#10;            }&amp;#10;        }&amp;#10;        cont_button.setSize(CONT_BUTTON_SIZE, {&quot;log&quot;: false});&amp;#10;        cont_button.setAutoDraw(true, {&quot;log&quot;: false});&amp;#10;        highlighter.setSize([0, 0], {&quot;log&quot;: false});&amp;#10;        trial_stop = true;&amp;#10;    } else {&amp;#10;        if (initial_reveal) {&amp;#10;            for (var obj, _pj_c = 0, _pj_a = objs, _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;                obj = _pj_a[_pj_c];&amp;#10;                if (_pj.in_es6(&quot;obj&quot;, obj.name)) {&amp;#10;                    obj.draw();&amp;#10;                }&amp;#10;            }&amp;#10;            if ((t &gt; reveal_seconds)) {&amp;#10;                for (var obj, _pj_c = 0, _pj_a = objs, _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;                    obj = _pj_a[_pj_c];&amp;#10;                    obj.setAutoDraw(false, {&quot;log&quot;: false});&amp;#10;                }&amp;#10;                highlighter.setSize(BOX_SIZE, {&quot;log&quot;: false});&amp;#10;                task_time_start = t;&amp;#10;                update_time_elapsed = true;&amp;#10;                initial_reveal = false;&amp;#10;            }&amp;#10;        } else {&amp;#10;            for (var i, _pj_c = 0, _pj_a = util.range(8), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;                i = _pj_a[_pj_c];&amp;#10;                if (visible[i]) {&amp;#10;                    continue;&amp;#10;                }&amp;#10;                if (mouse2.isPressedIn(boxes[i])) {&amp;#10;                    clicked_boxes.push(boxes[i].name);&amp;#10;                    click_times.push(task_time_elapsed);&amp;#10;                    visible[i] = true;&amp;#10;                    visible_t[i] = t;&amp;#10;                    objs[i].setAutoDraw(true, {&quot;log&quot;: false});&amp;#10;                    if ((! _pj.in_es6(&quot;blank&quot;, objs[i].name))) {&amp;#10;                        obj_count += 1;&amp;#10;                        if ((obj_count &gt;= n_fruits)) {&amp;#10;                            update_time_elapsed = false;&amp;#10;                        }&amp;#10;                    }&amp;#10;                    break;&amp;#10;                } else {&amp;#10;                    if (boxes[i].contains(mouse2)) {&amp;#10;                        highlighter.setPos(boxes[i].pos, {&quot;log&quot;: false});&amp;#10;                        highlighter.draw();&amp;#10;                        break;&amp;#10;                    }&amp;#10;                }&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;}&amp;#10;for (var i, _pj_c = 0, _pj_a = util.range(8), _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    i = _pj_a[_pj_c];&amp;#10;    if ((visible[i] &amp;&amp; ((t - visible_t[i]) &gt;= OBJ_DURATION))) {&amp;#10;        objs[i].setAutoDraw(false, {&quot;log&quot;: false});&amp;#10;        objs[i] = new visual.ImageStim({&quot;win&quot;: psychoJS.window, &quot;name&quot;: `${objs[i].name}_blank`, &quot;image&quot;: &quot;imgs/empty-box.png&quot;, &quot;pos&quot;: BOX_POS[i], &quot;size&quot;: BLANK_SIZE});&amp;#10;        visible[i] = false;&amp;#10;    }&amp;#10;}&amp;#10;if (((util.sum(visible) &lt;= 0) &amp;&amp; (obj_count &gt;= n_fruits))) {&amp;#10;    show_continue = true;&amp;#10;}&amp;#10;" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Routine" updates="constant" val="psychoJS.experiment.addData(&quot;clicked_boxes&quot;, clicked_boxes);&amp;#10;psychoJS.experiment.addData(&quot;click_times&quot;, click_times);&amp;#10;psychoJS.experiment.addData(&quot;time_taken_sec&quot;, click_times.pop());&amp;#10;psychoJS.experiment.addData(&quot;correct_boxes&quot;, correct_boxes);&amp;#10;" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="&amp;#10;thisExp.addData(&quot;clicked_boxes&quot;, clicked_boxes)&amp;#10;thisExp.addData(&quot;click_times&quot;, click_times)&amp;#10;thisExp.addData(&quot;time_taken_sec&quot;, click_times.pop())&amp;#10;thisExp.addData(&quot;correct_boxes&quot;, correct_boxes)&amp;#10;" valType="extendedCode"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="code2" valType="code"/>
+      </CodeComponent>
+      <TextComponent name="text2">
+        <Param name="color" updates="constant" val="white" valType="color"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flip" updates="constant" val="None" valType="str"/>
+        <Param name="font" updates="constant" val="Open Sans" valType="str"/>
+        <Param name="languageStyle" updates="None" val="LTR" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.05" valType="num"/>
+        <Param name="name" updates="None" val="text2" valType="code"/>
+        <Param name="opacity" updates="constant" val="" valType="num"/>
+        <Param name="ori" updates="constant" val="0" valType="num"/>
+        <Param name="pos" updates="constant" val="(0, 0.4)" valType="list"/>
+        <Param name="saveStartStop" updates="None" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="text" updates="set every repeat" val="$trial_name" valType="str"/>
+        <Param name="units" updates="None" val="height" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="num"/>
+      </TextComponent>
+      <MouseComponent name="mouse2">
+        <Param name="clickable" updates="constant" val="cont_button" valType="list"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutineOnPress" updates="constant" val="valid click" valType="str"/>
+        <Param name="name" updates="None" val="mouse2" valType="code"/>
+        <Param name="newClicksOnly" updates="constant" val="True" valType="bool"/>
+        <Param name="saveMouseState" updates="None" val="never" valType="str"/>
+        <Param name="saveParamsClickable" updates="constant" val="name," valType="list"/>
+        <Param name="saveStartStop" updates="None" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="False" valType="bool"/>
+        <Param name="timeRelativeTo" updates="constant" val="routine" valType="str"/>
+      </MouseComponent>
+      <TextComponent name="debugTimer">
+        <Param name="color" updates="constant" val="white" valType="color"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flip" updates="constant" val="None" valType="str"/>
+        <Param name="font" updates="constant" val="Open Sans" valType="str"/>
+        <Param name="languageStyle" updates="None" val="LTR" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.01" valType="num"/>
+        <Param name="name" updates="None" val="debugTimer" valType="code"/>
+        <Param name="opacity" updates="constant" val="0.2" valType="num"/>
+        <Param name="ori" updates="constant" val="0" valType="num"/>
+        <Param name="pos" updates="constant" val="(0.45, -0.45)" valType="list"/>
+        <Param name="saveStartStop" updates="None" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="condition" valType="str"/>
+        <Param name="startVal" updates="None" val="SHOW_TIMER" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="text" updates="set every frame" val="$round(task_time_elapsed, 3)" valType="str"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="num"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="instr">
+      <TextComponent name="text1">
+        <Param name="color" updates="constant" val="white" valType="color"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flip" updates="constant" val="None" valType="str"/>
+        <Param name="font" updates="constant" val="Open Sans" valType="str"/>
+        <Param name="languageStyle" updates="None" val="LTR" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.025" valType="num"/>
+        <Param name="name" updates="None" val="text1" valType="code"/>
+        <Param name="opacity" updates="constant" val="1" valType="num"/>
+        <Param name="ori" updates="constant" val="0" valType="num"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="list"/>
+        <Param name="saveStartStop" updates="None" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="text" updates="constant" val="Instructions:&amp;#10;&amp;#10;- There will be 8 boxes on the screen&amp;#10;- Some boxes will contain (a picture of) a fruit&amp;#10;- Their positions will be revealed for a short period of time before being hidden&amp;#10;- As fast as you can, find all the hidden fruits without clicking on empty boxes&amp;#10;- Errors will be recorded&amp;#10;- Time taken will be recorded (starting from when the fruits are hidden)&amp;#10;- Once a fruit has been &quot;found&quot; the box will become empty&amp;#10;- There will be a practice trial, followed by 6 trials&amp;#10;&amp;#10;Development/Debugging:&amp;#10;- Picture/Blank show duration set to 1 second to speed up trials&amp;#10;- No inter-trial instructions&amp;#10;- There is a very inconspicuous timer near the bottom-right of the screen&amp;#10;" valType="str"/>
+        <Param name="units" updates="None" val="height" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="0.98" valType="num"/>
+      </TextComponent>
+      <ImageComponent name="cont1">
+        <Param name="color" updates="constant" val="$[1,1,1]" valType="color"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
+        <Param name="flipVert" updates="constant" val="False" valType="bool"/>
+        <Param name="image" updates="constant" val="imgs/continue.png" valType="file"/>
+        <Param name="interpolate" updates="constant" val="linear" valType="str"/>
+        <Param name="mask" updates="constant" val="" valType="str"/>
+        <Param name="name" updates="None" val="cont1" valType="code"/>
+        <Param name="opacity" updates="constant" val="1" valType="num"/>
+        <Param name="ori" updates="constant" val="0" valType="num"/>
+        <Param name="pos" updates="constant" val="(0, -0.4)" valType="list"/>
+        <Param name="saveStartStop" updates="None" val="False" valType="bool"/>
+        <Param name="size" updates="constant" val="(0.32, 0.112)" valType="list"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="texture resolution" updates="constant" val="128" valType="num"/>
+        <Param name="units" updates="None" val="height" valType="str"/>
+      </ImageComponent>
+      <MouseComponent name="mouse1">
+        <Param name="clickable" updates="constant" val="cont1" valType="list"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutineOnPress" updates="constant" val="valid click" valType="str"/>
+        <Param name="name" updates="None" val="mouse1" valType="code"/>
+        <Param name="newClicksOnly" updates="constant" val="True" valType="bool"/>
+        <Param name="saveMouseState" updates="None" val="never" valType="str"/>
+        <Param name="saveParamsClickable" updates="constant" val="name," valType="list"/>
+        <Param name="saveStartStop" updates="None" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="False" valType="bool"/>
+        <Param name="timeRelativeTo" updates="constant" val="routine" valType="str"/>
+      </MouseComponent>
+    </Routine>
+  </Routines>
+  <Flow>
+    <Routine name="instr"/>
+    <LoopInitiator loopType="TrialHandler" name="trials">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[OrderedDict([('trial_name', 'Practice trial'), ('reveal_seconds', 4), ('n_fruits', 2)]), OrderedDict([('trial_name', 'Trial 1'), ('reveal_seconds', 3), ('n_fruits', 2)]), OrderedDict([('trial_name', 'Trial 2'), ('reveal_seconds', 3), ('n_fruits', 3)]), OrderedDict([('trial_name', 'Trial 3'), ('reveal_seconds', 3), ('n_fruits', 4)]), OrderedDict([('trial_name', 'Trial 4'), ('reveal_seconds', 2), ('n_fruits', 4)]), OrderedDict([('trial_name', 'Trial 5'), ('reveal_seconds', 2), ('n_fruits', 5)]), OrderedDict([('trial_name', 'Trial 6'), ('reveal_seconds', 2), ('n_fruits', 6)])]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="conditions.csv" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="sequential" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="trials" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="part1"/>
+    <LoopTerminator name="trials"/>
+  </Flow>
+</PsychoPy2experiment>

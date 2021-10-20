@@ -133,7 +133,7 @@ async function experimentInit() {
   text1 = new visual.TextStim({
     win: psychoJS.window,
     name: 'text1',
-    text: 'Instructions:\n\nThere will be 8 boxes on the screen. Some will contain a (picture of a) fruit, some will be empty (contain a red "X"). At the start of each trial, the positions of all the fruits will be revealed for a short period of time before being hidden.\n\nYou may click/tap on any of the boxes to show its contents. The contents will be visible for some time, during which you may not click that box again, but you can click on other boxes. Clicking on a box with a fruit will remove the fruit from the box, so the next click on the same box will reveal an empty box.\n\nYour mission, should you choose to accept it (or not), is to find all the fruits as fast as you can. In this series, there will be a practice trial, followed by 6 trials.\n\nDevelopment notes:\n- Recorded times start on first box clicked/tapped\n- Recorded times end when last fruit is found\n- Image display duration currently set to 1 second (instead of 3)\n- There is an inconspicuous timer near the bottom-right of the screen\n',
+    text: 'Instructions:\n\nThere will be 8 boxes on the screen. Some will contain a fruit, some will be empty (contain a red "X"). At the start of each trial, the positions of all the fruits will be revealed for a short period of time before being hidden.\n\nYou may then click/tap on any of the boxes to show its contents. The contents will be visible for some time, during which you may not click/tap on that box again, but you may click/tap on other boxes. Selecting a box with a fruit will remove the fruit from the box, making it empty.\n\nFind all the fruits as fast as you can while avoiding the empty boxes. There will be 1 practice trial, followed by 6 trials.\n\nDevelopment notes:\n- Recorded times start on first box clicked/tapped\n- Recorded times end when last fruit is found\n- Image display duration currently set to 1 second (instead of 3)\n- There is an inconspicuous timer near the bottom-right of the screen\n',
     font: 'Open Sans',
     units: 'height', 
     pos: [0, 0], height: 0.025,  wrapWidth: 0.98, ori: 0.0,
@@ -157,7 +157,7 @@ async function experimentInit() {
   // Initialize components for Routine "part1"
   part1Clock = new util.Clock();
   DEBUG = true;
-  RANDOMIZE = true;
+  RANDOMIZE = false;
   N_BOXES = 8;
   BOX_HALF_WIDTH = 0.1;
   box_width = (BOX_HALF_WIDTH * 2);
@@ -175,7 +175,7 @@ async function experimentInit() {
   BLANK_SIZE = OBJ_SIZE;
   BOX_POS = [[((- 3) * BOX_HALF_WIDTH), BOX_HALF_WIDTH], [(- BOX_HALF_WIDTH), BOX_HALF_WIDTH], [BOX_HALF_WIDTH, BOX_HALF_WIDTH], [(3 * BOX_HALF_WIDTH), BOX_HALF_WIDTH], [((- 3) * BOX_HALF_WIDTH), (- BOX_HALF_WIDTH)], [(- BOX_HALF_WIDTH), (- BOX_HALF_WIDTH)], [BOX_HALF_WIDTH, (- BOX_HALF_WIDTH)], [(3 * BOX_HALF_WIDTH), (- BOX_HALF_WIDTH)]];
   boxes = [];
-  for (var i, _pj_c = 0, _pj_a = util.range(8), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+  for (var i, _pj_c = 0, _pj_a = util.range(N_BOXES), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
       i = _pj_a[_pj_c];
       boxes.push(new visual.ImageStim({"win": psychoJS.window, "name": `box${(i + 1)}`, "image": "imgs/box.png", "pos": BOX_POS[i], "size": BOX_SIZE, "opacity": 0.5}));
   }
@@ -187,7 +187,7 @@ async function experimentInit() {
       objs6.push(new visual.ImageStim({"win": psychoJS.window, "name": `obj${(i + 1)}`, "image": IMG_PATHS[i], "pos": [0, 0], "size": OBJ_SIZE, "opacity": 1.0}));
   }
   if ((! RANDOMIZE)) {
-      OBJ_POS = {"Practice trial": [2, 5], "Trial 1": [1, 7], "Trial 2": [0, 3, 5], "Trial 3": [1, 2, 4, 6], "Trial 4": [1, 3, 4, 7], "Trial 5": [0, 2, 4, 6, 7], "Trial 6": [0, 2, 3, 4, 5, 7]};
+      OBJ_POS = {"Practice trial": [0, 6], "Trial 1": [5, 3], "Trial 2": [0, 3, 6], "Trial 3": [1, 4, 6, 7], "Trial 4": [0, 2, 5, 6], "Trial 5": [0, 1, 2, 5, 7], "Trial 6": [0, 2, 3, 4, 5, 6]};
   }
   CONT_BUTTON_SIZE = [0.32, 0.112];
   cont_button = new visual.ImageStim({"win": psychoJS.window, "name": "cont_button", "image": "imgs/continue.png", "pos": [0, (- 0.4)], "size": [0, 0]});
@@ -418,7 +418,7 @@ var task_time_start;
 var task_time_elapsed;
 var omissions;
 var double_omissions;
-var comissions;
+var commissions;
 var part1Components;
 function part1RoutineBegin(snapshot) {
   return async function () {
@@ -458,7 +458,7 @@ function part1RoutineBegin(snapshot) {
         correct_boxes.push(`box${(idx + 1)}`);
     }
     correct_boxes.sort();
-    for (var i, _pj_c = 0, _pj_a = util.range(8), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
+    for (var i, _pj_c = 0, _pj_a = util.range(N_BOXES), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
         i = _pj_a[_pj_c];
         if ((objs[i] === null)) {
             objs[i] = new visual.ImageStim({"win": psychoJS.window, "name": `blank${(i + 1)}`, "image": "imgs/empty-box.png", "pos": BOX_POS[i], "size": BLANK_SIZE});
@@ -476,7 +476,7 @@ function part1RoutineBegin(snapshot) {
     task_time_elapsed = 0.0;
     omissions = 0;
     double_omissions = 0;
-    comissions = 0;
+    commissions = 0;
     
     text2.setText(trial_name);
     // setup some python lists for storing info about the mouse2
@@ -574,7 +574,7 @@ function part1RoutineEachFrame() {
                             }
                         } else {
                             if (_pj.in_es6("_blank", objs[i].name)) {
-                                comissions += 1;
+                                commissions += 1;
                             } else {
                                 if (_pj.in_es6(boxes[i].name, clicked_boxes)) {
                                     double_omissions += 1;
@@ -709,8 +709,8 @@ function part1RoutineEnd() {
     psychoJS.experiment.addData("correct_boxes", correct_boxes);
     psychoJS.experiment.addData("omission_errors", omissions);
     psychoJS.experiment.addData("double_omission_errors", double_omissions);
-    psychoJS.experiment.addData("comission_errors", comissions);
-    total_errors = ((omissions + double_omissions) + comissions);
+    psychoJS.experiment.addData("commission_errors", commissions);
+    total_errors = ((omissions + double_omissions) + commissions);
     psychoJS.experiment.addData("total_errors", total_errors);
     
     // store data for psychoJS.experiment (ExperimentHandler)

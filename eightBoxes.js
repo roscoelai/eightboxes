@@ -57,17 +57,16 @@ psychoJS.start({
   expName: expName,
   expInfo: expInfo,
   resources: [
-    {'name': 'imgs/continue.png', 'path': 'imgs/continue.png'},
-    {'name': 'imgs/pear.png', 'path': 'imgs/pear.png'},
-    {'name': 'imgs/end-experiment.png', 'path': 'imgs/end-experiment.png'},
+    {'name': 'imgs/orange.png', 'path': 'imgs/orange.png'},
     {'name': 'imgs/banana.png', 'path': 'imgs/banana.png'},
-    {'name': 'imgs/apple.png', 'path': 'imgs/apple.png'},
-    {'name': 'imgs/box.png', 'path': 'imgs/box.png'},
-    {'name': 'imgs/strawberry.png', 'path': 'imgs/strawberry.png'},
+    {'name': 'conditions.csv', 'path': 'conditions.csv'},
     {'name': 'imgs/watermelon.png', 'path': 'imgs/watermelon.png'},
+    {'name': 'imgs/box.png', 'path': 'imgs/box.png'},
     {'name': 'imgs/empty-box.png', 'path': 'imgs/empty-box.png'},
-    {'name': 'imgs/grapes.png', 'path': 'imgs/grapes.png'},
-    {'name': 'conditions.csv', 'path': 'conditions.csv'}
+    {'name': 'imgs/apple.png', 'path': 'imgs/apple.png'},
+    {'name': 'imgs/strawberry.png', 'path': 'imgs/strawberry.png'},
+    {'name': 'imgs/continue.png', 'path': 'imgs/continue.png'},
+    {'name': 'imgs/grapes.png', 'path': 'imgs/grapes.png'}
   ]
 });
 
@@ -184,7 +183,7 @@ async function experimentInit() {
       boxes.push(new visual.ImageStim({"win": psychoJS.window, "name": `box${(i + 1)}`, "image": "imgs/box.png", "pos": BOX_POS[i], "size": BOX_SIZE, "opacity": 0.5}));
   }
   highlighter = new visual.ImageStim({"win": psychoJS.window, "name": "highlighter", "image": "imgs/box.png", "pos": BOX_POS[i], "size": BOX_SIZE, "opacity": 0.5});
-  IMG_PATHS = ["imgs/apple.png", "imgs/banana.png", "imgs/grapes.png", "imgs/pear.png", "imgs/strawberry.png", "imgs/watermelon.png"];
+  IMG_PATHS = ["imgs/apple.png", "imgs/banana.png", "imgs/grapes.png", "imgs/orange.png", "imgs/strawberry.png", "imgs/watermelon.png"];
   objs6 = [];
   for (var i, _pj_c = 0, _pj_a = util.range(6), _pj_b = _pj_a.length; (_pj_c < _pj_b); _pj_c += 1) {
       i = _pj_a[_pj_c];
